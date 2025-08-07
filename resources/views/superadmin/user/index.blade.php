@@ -71,7 +71,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center gap-1">
                                                         <button class="btn btn-success rounded-3" data-bs-toggle="modal"
-                                                            data-bs-target="#editModal{{ $user->id }}">
+                                                            data-bs-target="#editUserModal{{ $user->id }}">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </button>
 
@@ -87,6 +87,79 @@
 
                                                 </td>
                                             </tr>
+
+                                            <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1"
+                                                aria-labelledby="editUserModalLabel{{ $user->id }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <form id="editUserForm"
+                                                                action="#"
+                                                                method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('PUT')
+
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Name</label>
+                                                                    <input type="text" name="name" id="edit-name"
+                                                                        class="form-control" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Email</label>
+                                                                    <input type="email" name="email" id="edit-email"
+                                                                        class="form-control" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Role</label>
+                                                                    <select name="role" id="edit-role"
+                                                                        class="form-select" required>
+                                                                        <option value="superadmin">Superadmin</option>
+                                                                        <option value="admin">Admin</option>
+                                                                        <option value="guru">Guru</option>
+                                                                        <option value="siswa">Siswa</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="alert alert-warning small mt-4" role="alert">
+                                                                    Kosongkan password jika tidak ingin mengubahnya.
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Password</label>
+                                                                    <input type="password" name="password"
+                                                                        class="form-control">
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Confirm Password</label>
+                                                                    <input type="password" name="password_confirmation"
+                                                                        class="form-control">
+                                                                </div>
+
+                                                                {{-- <div class="mb-3">
+                                                                    <label for="edit_password"
+                                                                        class="form-label">Password</label>
+                                                                    <input type="password" class="form-control" 
+                                                                        id="edit_password" name="password"
+                                                                        placeholder="Leave blank if not changing">
+                                                                </div> --}}
+
+                                                                <button type="submit" class="btn btn-primary w-100">Save
+                                                                    Changes</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     @endif
                                 </tbody>
