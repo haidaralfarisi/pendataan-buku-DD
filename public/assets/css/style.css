@@ -1,0 +1,100 @@
+* {
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
+}
+
+body {
+    background-color: #f7f7f7;
+    overflow: hidden;
+}
+
+.nav-item {
+    font-weight: 450;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 12px;
+}
+.sidebar-scroll {
+    min-height: 100vh; /* ini penting */
+    overflow-y: auto;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column; /* Agar logout button bisa dorong ke bawah */
+    justify-content: space-between; /* Atur atas dan bawah */
+}
+
+.nav-link {
+    color: #333;
+}
+
+/* Sidebar utama di desktop */
+#sidebarMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1040; /* Lebih rendah dari modal (1055) */
+    overflow-y: auto;
+}
+
+@media (min-width: 992px) {
+    .content-wrapper {
+        margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
+    }
+}
+
+/* Responsive (mobile) sidebar */
+@media (max-width: 991.98px) {
+    #sidebarMenu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        height: 100vh; /* Penting untuk full height */
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        transition: left 0.3s ease-in-out;
+        z-index: 1055; /* Tetap di atas navbar */
+        overflow-y: auto; /* Scroll aktif saat mobile juga */
+    }
+
+    #sidebarMenu.show {
+        left: 0;
+    }
+}
+
+.nav-link {
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 0.975rem; /* agar hovernya rounded */
+    padding: 0.5rem 0.75rem;
+}
+
+.nav-link:hover {
+    background-color: #bed7fd; /* warna hover abu-abu muda */
+    text-decoration: none;
+}
+
+.nav-link.active {
+    background-color: #90bcfe; /* warna aktif biru */
+    color: #000000 !important;
+    font-weight: 600;
+}
+
+.nav-link.active i {
+    color: #000000 !important;
+}
+
+
+
+/* .btn-custom-add-user iconify-icon {
+    width: 20px;
+    height: 20px;
+} */
