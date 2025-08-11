@@ -97,10 +97,40 @@
                                                 <td class="text-center">{{ $books->firstItem() + $index }}</td>
                                                 <td>
                                                     @if ($book->image)
-                                                        <img src="{{ asset('storage/' . $book->image) }}"
-                                                            alt="{{ $book->title }}" width="80">
+                                                        <img src="{{ asset('storage/' . $book->image) }}" alt="photo"
+                                                            width="80" height="70" class="rounded"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#coverModal{{ $book->id }}"
+                                                            style="cursor:pointer;">
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="coverModal{{ $book->id }}"
+                                                            tabindex="-1"
+                                                            aria-labelledby="coverModalLabel{{ $book->id }}"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="coverModalLabel{{ $book->id }}">Cover
+                                                                            Preview
+                                                                        </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body text-center">
+                                                                        <img src="{{ asset('storage/' . $book->image) }}"
+                                                                            alt="cover" class="img-fluid rounded">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     @else
-                                                        <span class="text-muted">Tidak ada gambar</span>
+                                                        <div class="alert alert-danger d-inline-block py-1 px-2"
+                                                            role="alert">
+                                                            <i class="bi bi-image"></i> Tidak ada cover
+                                                        </div>
                                                     @endif
                                                 </td>
                                                 <td>{{ $book->classroom->class_name }}</td>
@@ -138,8 +168,8 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="editModalLabel">Edit Books</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
                                                         <div class="modal-body">
