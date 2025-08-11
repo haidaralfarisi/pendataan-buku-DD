@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/button.css') }}">
+
 
 
     {{-- Bootstrap CSS --}}

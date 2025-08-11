@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class YearBook extends Model
+class Books extends Model
 {
     use HasFactory;
 
@@ -13,8 +13,8 @@ class YearBook extends Model
         'id',
     ];
 
-    public function classrooms()
+    public function classRoom()
     {
-        return $this->hasMany(Classroom::class, 'year_book_id');
+        return $this->belongsTo(Classroom::class, 'classRoom_id');
     }
 }

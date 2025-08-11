@@ -27,12 +27,13 @@ class YearBookController extends Controller
         return redirect()->back()->with('success', 'Year book added successfully.');
     }
 
-    public function update(Request $request, YearBook $yearBook)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'year' => 'required|digits:4|integer|min:2000|max:2100',
         ]);
 
+        $yearBook = YearBook::findOrFail($id); // ambil data berdasarkan ID
         $yearBook->update([
             'year' => $request->year,
         ]);
@@ -40,8 +41,11 @@ class YearBookController extends Controller
         return redirect()->back()->with('success', 'Year book updated successfully.');
     }
 
-    public function destroy(YearBook $yearBook)
+
+    public function destroy($id)
     {
+
+        $yearBook = YearBook::findOrFail($id);
         $yearBook->delete();
 
         return redirect()->back()->with('success', 'Year book deleted successfully.');

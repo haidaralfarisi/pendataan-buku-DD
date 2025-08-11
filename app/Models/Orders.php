@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class YearBook extends Model
+class Orders extends Model
 {
     use HasFactory;
 
     protected $guarded = [
         'id',
     ];
-
-    public function classrooms()
-    {
-        return $this->hasMany(Classroom::class, 'year_book_id');
-    }
 }

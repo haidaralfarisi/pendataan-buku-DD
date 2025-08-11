@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\ortu\OrtuController;
+use App\Http\Controllers\superadmin\BooksController;
+use App\Http\Controllers\superadmin\ClassroomController;
 use App\Http\Controllers\Superadmin\SuperAdminController;
 
 use App\Http\Controllers\SuperAdmin\UserController as SuperadminUser;
@@ -47,9 +49,23 @@ Route::prefix('superadmin')->middleware(['auth', 'role:superadmin'])->group(func
 
     Route::get('/users', [SuperadminUser::class, 'index'])->name('superadmin.users.index');
     Route::post('/users', [SuperadminUser::class, 'store'])->name('superadmin.users.store');
+    Route::put('/users/{id}', [SuperadminUser::class, 'update'])->name('superadmin.users.update');
+    Route::delete('/users/{id}', [SuperadminUser::class, 'destroy'])->name('superadmin.users.destroy');
 
     Route::get('/yearBooks', [YearBookController::class, 'index'])->name('superadmin.yearBooks.index');
     Route::post('/yearBooks', [YearBookController::class, 'store'])->name('superadmin.yearBooks.store');
+    Route::put('/yearBooks/{id}', [YearBookController::class, 'update'])->name('superadmin.yearBooks.update');
+    Route::delete('/yearBooks/{id}', [YearBookController::class, 'destroy'])->name('superadmin.yearBooks.destroy');
+
+    Route::get('/classRooms', [ClassroomController::class, 'index'])->name('superadmin.classRooms.index');
+    Route::post('/classRooms', [ClassroomController::class, 'store'])->name('superadmin.classRooms.store');
+    Route::put('/classRooms/{id}', [ClassroomController::class, 'update'])->name('superadmin.classRooms.update');
+    Route::delete('/classRooms/{id}', [ClassroomController::class, 'destroy'])->name('superadmin.classRooms.destroy');
+
+    Route::get('/books', [BooksController::class, 'index'])->name('superadmin.books.index');
+    Route::post('/books', [BooksController::class, 'store'])->name('superadmin.books.store');
+    Route::put('/books/{id}', [BooksController::class, 'update'])->name('superadmin.books.update');
+    Route::delete('/books/{id}', [BooksController::class, 'destroy'])->name('superadmin.books.destroy');
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {

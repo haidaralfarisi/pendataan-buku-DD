@@ -8,15 +8,23 @@
             </button>
         </div>
 
-        <!-- User Dropdown di Kanan -->
+        <!-- Bagian Kanan -->
         <div class="d-flex align-items-center">
+
+            <!-- Icon Bell -->
+            <a class="nav-icon-hover d-flex align-items-center me-3" href="#"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ asset('assets/icons/bell.png') }}" alt="Bell Icon" width="22" height="22">
+            </a>
+
+            <!-- User Dropdown -->
             <div class="dropdown">
                 <a class="nav-link nav-icon-hover d-flex align-items-center dropdown-toggle" href="#"
-                        id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/icons/user-1.jpg') }}" alt="" width="35"
-                            height="35" class="rounded-circle">
-                        <span class="ms-2">Hi! {{ Auth::user()->name }}</span>
-                    </a>
+                    id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ asset('assets/icons/user-1.jpg') }}" alt="" width="35" height="35"
+                        class="rounded-circle">
+                    <span class="ms-2">Hi! {{ Auth::user()->name }}</span>
+                </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li>
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">

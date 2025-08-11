@@ -16,15 +16,15 @@
                 <div class="card shadow-sm rounded-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="fw-semibold mb-0">Manage Your Year Book</h4>
+                            <h4 class="fw-semibold mb-0">Manage Your Class Rooms</h4>
 
                             <div class="d-flex gap-2">
 
                                 <!-- ADD BUTTON -->
-                                <button class="btn-custom-add" data-bs-toggle="modal" data-bs-target="#addYearModal">
-                                    <img src="{{ asset('assets/icons/plus.png') }}" alt="Add Year" width="20"
+                                <button class="btn-custom-add" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <img src="{{ asset('assets/icons/plus.png') }}" alt="Add Class" width="20"
                                         height="20">
-                                    <span>Add Year Book</span>
+                                    <span>Add Class Rooms</span>
                                 </button>
 
                             </div>
@@ -65,12 +65,13 @@
                                 <thead>
                                     <tr>
                                         <th width="30">No</th>
-                                        <th>Year</th>
+                                        <th>Class Name</th>
+                                        <th>Year Book ID</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($yearBooks->isEmpty())
+                                    @if ($classrooms->isEmpty())
                                         <tr>
                                             <td colspan="4" class="text-center">
                                                 <div class="py-4">
@@ -81,25 +82,26 @@
                                             </td>
                                         </tr>
                                     @else
-                                        @foreach ($yearBooks as $index => $yearBook)
+                                        @foreach ($classrooms as $index => $classroom)
                                             <tr>
-                                                <td class="text-center">{{ $yearBooks->firstItem() + $index }}</td>
-                                                <td>{{ $yearBook->year }}</td>
+                                                <td class="text-center">{{ $classrooms->firstItem() + $index }}</td>
+                                                <td>{{ $classroom->class_name }}</td>
+                                                <td>{{ $classroom->yearBook->year }}</td>
 
                                                 <td>
                                                     <div class="d-flex align-items-center gap-1">
                                                         <button type="button" class="btn-custom-add"
                                                             style="background: none; border: none; padding: 0; cursor: pointer;"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#edityearBookModal{{ $yearBook->id }}">
+                                                            data-bs-target="#editModal{{ $classroom->id }}">
                                                             <img src="{{ asset('assets/icons/edit.png') }}" alt="Edit"
                                                                 width="28" height="28">
                                                         </button>
 
                                                         <form
-                                                            action="{{ route('superadmin.yearBooks.destroy', $yearBook->id) }}"
+                                                            action="{{ route('superadmin.classRooms.destroy', $classroom->id) }}"
                                                             method="POST"
-                                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus Class Room ini?');">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn-custom-add"
@@ -113,34 +115,52 @@
                                                 </td>
                                             </tr>
 
-                                            <div class="modal fade" id="edityearBookModal{{ $yearBook->id }}"
-                                                tabindex="-1" aria-labelledby="edityearBookModalLabel{{ $yearBook->id }}"
-                                                aria-hidden="true">
+                                            <div class="modal fade" id="editModal{{ $classroom->id }}" tabindex="-1"
+                                                aria-labelledby="editModalLabel{{ $classroom->id }}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="edityearBookModalLabel">Edit
-                                                                yearBook</h5>
+                                                            <h5 class="modal-title" id="editModalLabel">Edit
+                                                                Class Room</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                 aria-label="Close"></button>
                                                         </div>
 
                                                         <div class="modal-body">
-                                                            <form id="edityearBookForm"
-                                                                action="{{ route('superadmin.yearBooks.update', ['id' => $yearBook->id]) }}"
+                                                            <form id="editForm"
+                                                                action="{{ route('superadmin.classRooms.update', ['id' => $classroom->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('PUT')
 
                                                                 <div class="mb-3">
-                                                                    <label for="year" class="form-label">Tahun</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="year" name="year"
-                                                                        value="{{ $yearBook->year }}" required>
+                                                                    <label for="class_name" class="form-label">Class
+                                                                        Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="class_name" name="class_name"
+                                                                        value="{{ $classroom->class_name }}" required>
                                                                 </div>
 
-                                                                <button type="submit" class="btn btn-primary w-100">Save
-                                                                    Changes</button>
+                                                                <div class="mb-3">
+                                                                    <label for="year_book_id" class="form-label">Year
+                                                                        Book</label>
+                                                                    <select class="form-select" id="year_book_id"
+                                                                        name="year_book_id" required>
+                                                                        <option value="">-- Select Year Book --
+                                                                        </option>
+                                                                        @foreach ($yearBooks as $yb)
+                                                                            <option value="{{ $yb->id }}"
+                                                                                {{ $classroom->year_book_id == $yb->id ? 'selected' : '' }}>
+                                                                                {{ $yb->year }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+
+                                                                <button type="submit" class="btn btn-primary w-100 rounded-pill">
+                                                                    Save Changes
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -153,35 +173,45 @@
                         </div>
 
                         <div class="d-flex justify-content-center mt-3">
-                            {{ $yearBooks->links('pagination::bootstrap-5') }}
+                            {{ $classrooms->links('pagination::bootstrap-5') }}
                         </div>
                     </div>
             </main>
         </div>
     </div>
 
-    <!-- Modal Tambah User -->
-    <div class="modal fade" id="addYearModal" tabindex="-1" aria-labelledby="addYearModalLabel" aria-hidden="true">
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content rounded-4 shadow">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-semibold" id="addYearModalLabel">Add New User</h5>
+                    <h5 class="modal-title fw-semibold" id="addModalLabel">Add Class</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('superadmin.yearBooks.store') }}" method="POST">
+                <form action="{{ route('superadmin.classRooms.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Tahun</label>
-                            <input type="number" name="year" class="form-control" min="1900" max="2100"
+                            <label class="form-label">Class Name</label>
+                            <input type="text" name="class_name" placeholder="Class Name" class="form-control"
                                 required>
                         </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <div class="mb-3">
+                            <label class="form-label">Year Book</label>
+                            <select name="year_book_id" class="form-select" required>
+                                <option value="">-- Pilih Tahun --</option>
+                                @foreach ($yearBooks as $yearBook)
+                                    <option value="{{ $yearBook->id }}">{{ $yearBook->year }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
                     </div>
                 </form>
             </div>
