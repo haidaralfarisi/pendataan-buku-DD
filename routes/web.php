@@ -20,7 +20,7 @@ Route::get('/', function () {
         // User sudah login, redirect ke dashboard sesuai level
         return redirect()->route(match (strtoupper(Auth::user()->level)) {
             'superadmin' => 'superadmin.dashboard',
-            'admin' => 'admin.dashboard',
+            'orangtua' => 'orangtua.dashboard',
             default => 'home'
         });
     }
@@ -36,8 +36,8 @@ Route::get('/home', function () {
     switch ($user->role) {
         case 'superadmin':
             return redirect()->route('superadmin.dashboard');
-        case 'admin':
-            return redirect()->route('admin.dashboard');
+        case 'orangtua':
+            return redirect()->route('orangtua.dashboard');
         default:
             return redirect()->route('welcome');
     }
@@ -68,14 +68,14 @@ Route::prefix('superadmin')->middleware(['auth', 'role:superadmin'])->group(func
     Route::delete('/books/{id}', [BooksController::class, 'destroy'])->name('superadmin.books.destroy');
 });
 
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-});
 
-Route::prefix('ortu')->middleware(['auth', 'role:ortu'])->group(function () {
+Route::prefix('orangtua')->middleware(['auth', 'role:orangtua'])->group(function () {
     Route::get('/dashboard', [OrtuController::class, 'index'])->name('ortu.dashboard');
 });
 
+// Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+//     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+// });
 
 // Route::prefix('superadmin')->middleware(['auth', 'level:superadmin'])->group(function () {
 //     Route::get('/dashboard', [OrtuController::class, 'index'])->name('superadmin.dashboard');

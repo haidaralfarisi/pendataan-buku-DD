@@ -25,7 +25,8 @@
                                     <input type="text" name="search" value="{{ request('search') }}"
                                         class="form-control me-2" placeholder="Search User...">
                                     <button class="btn btn-outline-secondary" type="submit">
-                                        <iconify-icon icon="mdi:magnify" width="20"></iconify-icon>
+                                        <img src="{{ asset('assets/icons/search.png') }}" alt="Add User" width="20"
+                                            height="20">
                                     </button>
                                 </form>
 

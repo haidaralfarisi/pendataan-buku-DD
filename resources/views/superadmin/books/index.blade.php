@@ -23,9 +23,10 @@
                                 <form action="{{ route('superadmin.books.index') }}" method="GET" class="d-flex"
                                     role="search">
                                     <input type="text" name="search" value="{{ request('search') }}"
-                                        class="form-control me-2" placeholder="Cari user...">
+                                        class="form-control me-2" placeholder="Search Books...">
                                     <button class="btn btn-outline-secondary" type="submit">
-                                        <iconify-icon icon="mdi:magnify" width="20"></iconify-icon>
+                                        <img src="{{ asset('assets/icons/search.png') }}" alt="Search Books" width="20"
+                                            height="20">
                                     </button>
                                 </form>
 

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->Integer('user_id'); //relasi ke users
-            $table->integer('total_books');
-            $table->integer('total_price');
-            $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
+            $table->integer('order_id'); // relasi ke orders
+            $table->integer('book_id'); // relasi ke books
+            $table->integer('quantity')->default(1); // jumlah buku
+            $table->integer('price_each'); // harga satuan buku
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_details');
     }
 };

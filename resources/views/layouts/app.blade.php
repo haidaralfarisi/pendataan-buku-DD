@@ -19,7 +19,7 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/button.css') }}">
@@ -29,9 +29,9 @@
     {{-- Bootstrap CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     {{-- Bootstrap Icons --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> --}}
 
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    {{-- <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script> --}}
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -44,12 +44,14 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
+    @yield('custom_css')
+
+
 </head>
 
 <body>
     {{-- Main Content --}}
     @yield('content')
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
