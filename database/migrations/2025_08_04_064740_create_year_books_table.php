@@ -16,7 +16,7 @@ return new class extends Migration
             $table->year('year'); // Tahun buku
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

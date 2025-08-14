@@ -75,8 +75,9 @@
                                     <tr>
                                         <th width="30">No</th>
                                         <th>Name</th>
-                                        <th>Email</th>
+                                        <th>NISN</th>
                                         <th>Role</th>
+                                        <th>Class Room</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -96,8 +97,9 @@
                                             <tr>
                                                 <td class="text-center">{{ $users->firstItem() + $index }}</td>
                                                 <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->nisn }}</td>
                                                 <td>{{ $user->role ?? '-' }}</td>
+                                                <td>{{ $user->classroom->class_name ?? '-' }}</td>
 
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
@@ -150,10 +152,27 @@
                                                                 </div>
 
                                                                 <div class="mb-3">
-                                                                    <label for="email" class="form-label">Email</label>
-                                                                    <input type="email" class="form-control"
-                                                                        id="email" name="email"
-                                                                        value="{{ $user->email }}" required>
+                                                                    <label for="nisn" class="form-label">NISN</label>
+                                                                    <input type="number" class="form-control"
+                                                                        id="nisn" name="nisn"
+                                                                        value="{{ $user->nisn }}" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Class Room</label>
+                                                                    <select name="classroom_id" class="form-select"
+                                                                        required>
+                                                                        <option value="" disabled
+                                                                            {{ empty($user->classroom_id) ? 'selected' : '' }}>
+                                                                            -- Select Class Room --
+                                                                        </option>
+                                                                        @foreach ($classrooms as $classroom)
+                                                                            <option value="{{ $classroom->id }}"
+                                                                                {{ old('classroom_id', $user->classroom_id) == $classroom->id ? 'selected' : '' }}>
+                                                                                {{ $classroom->class_name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
 
 
@@ -164,12 +183,9 @@
                                                                         <option value="superadmin"
                                                                             {{ $user->role === 'superadmin' ? 'selected' : '' }}>
                                                                             Superadmin</option>
-                                                                        <option value="admin"
-                                                                            {{ $user->role === 'admin' ? 'selected' : '' }}>
-                                                                            Admin</option>
-                                                                        <option value="ortu"
-                                                                            {{ $user->role === 'ortu' ? 'selected' : '' }}>
-                                                                            Ortu</option>
+                                                                        <option value="orangtua"
+                                                                            {{ $user->role === 'orangtua' ? 'selected' : '' }}>
+                                                                            Orang Tua</option>
                                                                     </select>
                                                                 </div>
 
@@ -232,17 +248,28 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <label class="form-label">NISN</label>
+                            <input type="number" name="nisn" class="form-control" placeholder="nisn" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Class Room</label>
+                            <select name="classroom_code" class="form-select" required>
+                                <option value="" disabled selected>-- Select Class Room --</option>
+                                @foreach ($classrooms as $classroom)
+                                    <option value="{{ $classroom->id }}">
+                                        {{ $classroom->class_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Role</label>
                             <select name="role" class="form-select" required>
-                                <option value="" disabled selected>Pilih role</option>
+                                <option value="" disabled selected>-- Select role --</option>
                                 <option value="superadmin">Superadmin</option>
-                                <option value="admin">Admin</option>
-                                <option value="ortu">Ortu</option>
+                                <option value="orangtua">Orang Tua</option>
                                 <!-- Tambahkan sesuai kebutuhan -->
                             </select>
                         </div>

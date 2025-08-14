@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\superadmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classroom;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,16 +12,18 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
-        return view('superadmin.user.index', compact('users'));
+        $classrooms = Classroom::all(); // Ambil semua classroom untuk dropdown
+        $users = User::with('classroom')->paginate(10);
+        return view('superadmin.user.index', compact('users', 'classrooms'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'role' => 'nullable|string|max:50',
+            'nisn' => 'required|digits_between:5,20|unique:users,nisn', // NISN wajib unik
+            'classroom_id' => 'nullable|integer', // pastikan ada validasi classroom
+            'role' => 'nullable|string|in:superadmin,orangtua',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -37,8 +40,9 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'role' => 'nullable|string|max:50',
+            'nisn' => 'required|digits_between:5,20|unique:users,nisn,' . $user->id, // unik kecuali user ini
+            'classroom_id' => 'nullable|integer',
+            'role' => 'nullable|string|in:superadmin,orangtua',
             'password' => 'nullable|string|min:6|confirmed',
         ]);
 

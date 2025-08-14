@@ -22,6 +22,11 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    public function username()
+    {
+        return 'nisn'; // pakai kolom nisn untuk login
+    }
+
     protected function authenticated(Request $request, $user)
     {
         return redirect($this->redirectToBasedOnRole($user));

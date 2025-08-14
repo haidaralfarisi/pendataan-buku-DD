@@ -16,23 +16,18 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Super Admin',
-            'email' => 'superadmin@diandidaktika.sch.id',
+            'nisn' => '12345',
             'password' => Hash::make('admin123'),
             'role' => 'superadmin',
-        ]);
-
-        User::create([
-            'name' => 'Admin Biasa',
-            'email' => 'admin@diandidaktika.sch.id',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
+            'classroom_id' => null, // Assuming 0 is a placeholder for superadmin
         ]);
 
         User::create([
             'name' => 'Orang Tua',
-            'email' => 'ortu@diandidaktika.sch.id',
+            'nisn' => '123455',
             'password' => Hash::make('admin123'),
-            'role' => 'ortu',
+            'role' => 'orangtua',
+            'classroom_id' => null, // Assuming 0 is a placeholder for orangtua
         ]);
     }
 }

@@ -30,15 +30,6 @@
             </li>
 
             <li class="nav-item mb-2">
-                <a href="{{ route('superadmin.users.index') }}"
-                    class="nav-link d-flex align-items-center gap-2
-               {{ request()->routeIs('superadmin.users.index') ? 'active' : 'text-dark' }}">
-                    <img src="{{ asset('assets/icons/user.png') }}" alt="Dashboard Icon" width="22" height="22">
-                    <span>Management User</span>
-                </a>
-            </li>
-
-            <li class="nav-item mb-2">
                 <a href="{{ route('superadmin.yearBooks.index') }}"
                     class="nav-link d-flex align-items-center gap-2
                {{ request()->routeIs('superadmin.yearBooks.index') ? 'active' : 'text-dark' }}">
@@ -59,11 +50,19 @@
             </li>
 
             <li class="nav-item mb-2">
+                <a href="{{ route('superadmin.users.index') }}"
+                    class="nav-link d-flex align-items-center gap-2
+               {{ request()->routeIs('superadmin.users.index') ? 'active' : 'text-dark' }}">
+                    <img src="{{ asset('assets/icons/user.png') }}" alt="Dashboard Icon" width="22" height="22">
+                    <span>Management User</span>
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
                 <a href="{{ route('superadmin.books.index') }}"
                     class="nav-link d-flex align-items-center gap-2
                {{ request()->routeIs('superadmin.books.index') ? 'active' : 'text-dark' }}">
-                    <img src="{{ asset('assets/icons/book.png') }}" alt="Dashboard Icon" width="22"
-                        height="22">
+                    <img src="{{ asset('assets/icons/book.png') }}" alt="Dashboard Icon" width="22" height="22">
                     <span>Books</span>
                 </a>
             </li>

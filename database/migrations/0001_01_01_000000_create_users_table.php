@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nisn')->unique(); //NISN
-            $table->timestamp('email_verified_at')->nullable();
+            // $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->integer('classroom_code'); // Relasi Dari Table classroom 
+            $table->integer('classroom_id')->nullable(); // Relasi Dari Table classroom
             $table->enum('role', ['superadmin', 'orangtua'])->default('orangtua');
             $table->rememberToken();
             $table->timestamps();
