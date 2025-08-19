@@ -12,15 +12,21 @@
         <div class="d-flex align-items-center">
 
             <!-- Icon Bell -->
-            <a class="nav-icon-hover d-flex align-items-center me-3" href="#"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('assets/icons/bell.png') }}" alt="Bell Icon" width="22" height="22">
-            </a>
+            <div class="dropdown me-3">
+                <a class="nav-icon-hover d-flex align-items-center" href="#" id="bellDropdown"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ asset('assets/icons/bell.png') }}" alt="Bell Icon" width="22" height="22">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bellDropdown">
+                    <li><a class="dropdown-item" href="#">Notifikasi 1</a></li>
+                    <li><a class="dropdown-item" href="#">Notifikasi 2</a></li>
+                </ul>
+            </div>
 
             <!-- User Dropdown -->
             <div class="dropdown">
                 <a class="nav-link nav-icon-hover d-flex align-items-center dropdown-toggle" href="#"
-                    id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                    id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{ asset('assets/icons/user-1.jpg') }}" alt="" width="35" height="35"
                         class="rounded-circle">
                     <span class="ms-2">Hi! {{ Auth::user()->name }}</span>
@@ -36,7 +42,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
 
+        </div>
     </div>
 </header>

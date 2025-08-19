@@ -39,7 +39,7 @@ class LoginController extends Controller
                 return route('superadmin.dashboard'); // Sesuaikan dengan route yang ada
 
             case 'orangtua':
-                return route('orangtua.dashboard'); // Sesuaikan dengan route yang ada
+                return route('ortu.dashboard'); // Sesuaikan dengan route yang ada
 
             default:
                 return route('welcome'); // Redirect default jika level tidak sesuai

@@ -8,6 +8,10 @@ use App\Http\Controllers\Superadmin\SuperAdminController;
 
 use App\Http\Controllers\SuperAdmin\UserController as SuperadminUser;
 use App\Http\Controllers\superadmin\YearBookController;
+
+
+use App\Http\Controllers\Ortu\BooksController as OrtuBooksController;
+use App\Http\Controllers\ortu\OrdersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +41,7 @@ Route::get('/home', function () {
         case 'superadmin':
             return redirect()->route('superadmin.dashboard');
         case 'orangtua':
-            return redirect()->route('orangtua.dashboard');
+            return redirect()->route('ortu.dashboard');
         default:
             return redirect()->route('welcome');
     }
@@ -71,6 +75,23 @@ Route::prefix('superadmin')->middleware(['auth', 'role:superadmin'])->group(func
 
 Route::prefix('orangtua')->middleware(['auth', 'role:orangtua'])->group(function () {
     Route::get('/dashboard', [OrtuController::class, 'index'])->name('ortu.dashboard');
+
+    Route::get('/books', [OrtuBooksController::class, 'index'])->name('ortu.books.index');
+    Route::post('/books', [OrtuBooksController::class, 'store'])->name('ortu.books.store');
+    Route::put('/books/{id}', [OrtuBooksController::class, 'update'])->name('ortu.books.update');
+    Route::delete('/books/{id}', [OrtuBooksController::class, 'destroy'])->name('ortu.books.destroy');
+
+    Route::post('/ortu/books/cart', [OrtuBooksController::class, 'addToCart'])->name('ortu.books.cart');
+    Route::post('/ortu/books/remove', [OrtuBooksController::class, 'removeFromCart'])->name('ortu.books.remove');
+
+
+    Route::post('/orders', [OrdersController::class, 'store'])->name('orders.store');
+    Route::get('/orders/{id}', [OrdersController::class, 'show'])->name('orders.show');
+    Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+
+    Route::patch('/orders/{order}/item/{detail}', [OrdersController::class, 'updateQuantity'])->name('orders.updateQuantity');
+    Route::delete('/orders/{order}/item/{detail}', [OrdersController::class, 'deleteItem'])->name('orders.deleteItem');
+    Route::delete('/orders/{order}/cancel', [OrdersController::class, 'cancel'])->name('orders.cancel');
 });
 
 // Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {

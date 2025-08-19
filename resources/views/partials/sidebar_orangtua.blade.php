@@ -1,7 +1,7 @@
 <nav id="sidebarMenu" class="bg-light border-end d-flex flex-column position-sticky top-0" style="min-height: 100vh;">
     {{-- Header Sidebar --}}
     <div class="d-flex justify-content-between align-items-center px-3 pt-2 pb-2">
-        <a href="{{ route('superadmin.dashboard') }}" class="d-flex align-items-center gap-2 text-decoration-none">
+        <a href="{{ route('ortu.dashboard') }}" class="d-flex align-items-center gap-2 text-decoration-none">
             <img src="{{ asset('assets/icons/ic-logo-dd.png') }}" alt="Logo" style="height: 60px;">
             <span class="fw-bold text-dark">Dian Didaktika</span>
         </a>
@@ -20,9 +20,9 @@
             </li>
 
             <li class="nav-item mb-2">
-                <a href="{{ route('superadmin.dashboard') }}"
+                <a href="{{ route('ortu.dashboard') }}"
                     class="nav-link d-flex align-items-center gap-2
-                    {{ request()->routeIs('superadmin.dashboard') ? 'active' : 'text-dark' }}">
+                    {{ request()->routeIs('ortu.dashboard') ? 'active' : 'text-dark' }}">
                     <img src="{{ asset('assets/icons/dashboard.png') }}" alt="Dashboard Icon" width="22"
                         height="22">
                     <span>Dashboard</span>
@@ -30,6 +30,15 @@
             </li>
 
             <li class="nav-item mb-2">
+                <a href="{{ route('ortu.books.index') }}"
+                    class="nav-link d-flex align-items-center gap-2
+               {{ request()->routeIs('ortu.books.index') ? 'active' : 'text-dark' }}">
+                    <img src="{{ asset('assets/icons/book.png') }}" alt="Dashboard Icon" width="22" height="22">
+                    <span>Buy Books</span>
+                </a>
+            </li>
+
+            {{-- <li class="nav-item mb-2">
                 <a href="{{ route('superadmin.yearBooks.index') }}"
                     class="nav-link d-flex align-items-center gap-2
                {{ request()->routeIs('superadmin.yearBooks.index') ? 'active' : 'text-dark' }}">
@@ -58,23 +67,7 @@
                 </a>
             </li>
 
-            <li class="nav-item mb-2">
-                <a href="{{ route('superadmin.books.index') }}"
-                    class="nav-link d-flex align-items-center gap-2
-               {{ request()->routeIs('superadmin.books.index') ? 'active' : 'text-dark' }}">
-                    <img src="{{ asset('assets/icons/book.png') }}" alt="Dashboard Icon" width="22" height="22">
-                    <span>Books</span>
-                </a>
-            </li>
 
-            <li class="nav-item mb-2">
-                <a href="{{ route('superadmin.books.index') }}"
-                    class="nav-link d-flex align-items-center gap-2
-               {{ request()->routeIs('superadmin.books.index') ? 'active' : 'text-dark' }}">
-                    <img src="{{ asset('assets/icons/order.png') }}" alt="Dashboard Icon" width="22" height="22">
-                    <span>Orders</span>
-                </a>
-            </li>
 
             {{-- <li class="nav-item mb-2">
                 <a href="#" class="nav-link text-dark d-flex align-items-center gap-3">

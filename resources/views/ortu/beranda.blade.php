@@ -8,7 +8,7 @@
         <div class="row">
             {{-- Sidebar --}}
             <nav class="col-lg-2 p-0 sidebar-scroll" id="sidebarMenu">
-                @include('partials.sidebar_superadmin')
+                @include('partials.sidebar_orangtua')
             </nav>
 
             {{-- Konten Utama --}}

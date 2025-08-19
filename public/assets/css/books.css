@@ -1,0 +1,148 @@
+/* Book Card */
+.book-card {
+    margin-top: 5px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    background: #fff;
+    height: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Book Image */
+.book-img {
+    padding-top: 10px;
+    width: 100%;
+    max-width: 140px;   /* gambar proporsional, nggak terlalu kecil */
+    height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.book-img.placeholder {
+    background-color: #eaeaea;
+}
+
+/* Book Info */
+.book-info {
+    text-align: center;
+    margin-top: 12px;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    min-height: 38px; /* seragam untuk judul pendek/panjang */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-class {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.book-price {
+    font-weight: bold;
+    color: #2a7ae4;
+    font-size: 1rem;
+}
+
+/* Checkbox di bawah */
+.book-select {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-checkbox {
+    display: none; /* tetap bisa diklik via label/card */
+}
+
+/* Efek saat card dipilih */
+.book-card.active {
+    border: 2px solid #198754;
+    background-color: #e9f9f1 !important;
+}
+
+/* Container Scroll */
+.book-list-container {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    padding-right: 5px;
+    padding-bottom: 200px; /* ruang untuk order summary */
+}
+
+/* Order Summary Floating */
+.order-summary-floating {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 900px;
+    z-index: 1050;
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.order-summary-floating.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Tablet (iPad) */
+@media (min-width: 768px) and (max-width: 1366px) {
+    .order-summary-floating {
+        width: calc(100% - 60px);
+        max-width: 700px;
+        bottom: 15px;
+    }
+}
+
+/* Mobile (HP) */
+@media (max-width: 767px) {
+    .order-summary-floating {
+        left: 0;
+        transform: none;
+        width: 100%;
+        bottom: 0;
+        border-radius: 1rem 1rem 0 0;
+    }
+}
+
+/* Summary khusus mobile & tablet */
+@media (max-width: 1024px) {
+    .summary-mobile {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        z-index: 1000;
+    }
+}
