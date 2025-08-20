@@ -47,7 +47,6 @@
     font-size: 0.95rem;
     min-height: 38px; /* seragam untuk judul pendek/panjang */
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

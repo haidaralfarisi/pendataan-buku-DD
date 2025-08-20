@@ -20,7 +20,7 @@ class Classroom extends Model
 
     public function books()
     {
-        return $this->hasMany(Classroom::class, 'classRoom_id');
+        return $this->hasMany(Classroom::class, 'classroom_id');
     }
 
     public function users()

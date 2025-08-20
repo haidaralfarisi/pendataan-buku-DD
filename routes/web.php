@@ -92,6 +92,11 @@ Route::prefix('orangtua')->middleware(['auth', 'role:orangtua'])->group(function
     Route::patch('/orders/{order}/item/{detail}', [OrdersController::class, 'updateQuantity'])->name('orders.updateQuantity');
     Route::delete('/orders/{order}/item/{detail}', [OrdersController::class, 'deleteItem'])->name('orders.deleteItem');
     Route::delete('/orders/{order}/cancel', [OrdersController::class, 'cancel'])->name('orders.cancel');
+
+    Route::put('/orders/{order}/confirm', [OrdersController::class, 'confirm'])->name('ortu.orders.confirm');
+
+    // riwayat pembelian
+    Route::get('/history', [OrdersController::class, 'history'])->name('ortu.orders.history');
 });
 
 // Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {

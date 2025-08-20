@@ -46,7 +46,7 @@
 
             {{-- Desktop (tetap di kanan) --}}
             <div class="col-lg-4 d-none d-lg-block">
-                <div class="p-4 border rounded shadow-sm position-sticky" style="top: 20px;">
+                <div class="p-4 border rounded shadow-sm">
                     <h5 class="mb-3">Summary</h5>
                     <div class="d-flex justify-content-between">
                         <span>Subtotal</span>
@@ -56,37 +56,35 @@
                         <span>Ongkir</span>
                         <span>Gratis</span>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <span>Jumlah Buku</span>
-                        <span>{{ $order->details->sum('quantity') }}</span>
-                    </div>
                     <hr>
                     <div class="d-flex justify-content-between fw-bold">
                         <span>Total</span>
                         <span>Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
                     </div>
-
-                    <div class="mt-4">
-                        <a href="#" class="btn btn-primary w-100 mb-2">Buat Pesanan</a>
-                        <form action="{{ route('orders.cancel', $order->id) }}" method="POST"
-                            onsubmit="return confirm('Yakin ingin membatalkan pesanan ini? Semua data akan dihapus.')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger w-100">Batalkan Pesanan</button>
-                        </form>
+                    <div class="d-flex justify-content-between fw-bold mb-4">
+                        <span>Jumlah Buku :</span>
+                        <span class="text-muted">{{ $order->details->sum('quantity') }}</span>
                     </div>
-                </div>
-            </div>
 
-            {{-- Mobile & Tablet (sticky bawah) --}}
-            <div class="summary-mobile d-lg-none">
-                <div class="d-flex justify-content-between">
-                    <span>Total</span>
-                    <span class="fw-bold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
-                </div>
-                <small class="text-muted">Jumlah Buku: {{ $order->details->sum('quantity') }}</small>
-                <div class="mt-2">
-                    <a href="#" class="btn btn-primary w-100 mb-2">Buat Pesanan</a>
+                    <form action="{{ route('ortu.orders.confirm', $order->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="mb-2">
+                            <label class="form-label">Nama Orang Tua</label>
+                            <input type="text" name="parent_name" class="form-control" value="{{ old('parent_name') }}"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nomor HP Orang Tua</label>
+                            <input type="text" name="parent_phone" class="form-control"
+                                value="{{ old('parent_phone') }}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Buat Pesanan</button>
+                    </form>
+
                     <form action="{{ route('orders.cancel', $order->id) }}" method="POST"
                         onsubmit="return confirm('Yakin ingin membatalkan pesanan ini? Semua data akan dihapus.')">
                         @csrf
@@ -96,6 +94,70 @@
                 </div>
             </div>
 
+
+            <!-- Summary Mobile -->
+            <!-- Summary Mini (Fixed Bottom, Mobile Only) -->
+            <div class="summary-mini d-lg-none fixed-bottom bg-white border-top p-3 shadow">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <small>Total</small><br>
+                        <span class="fw-bold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
+                        <div>
+                            <small class="text-muted">Jumlah Buku: {{ $order->details->sum('quantity') }}</small>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Checkout -->
+            <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4 shadow">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="checkoutModalLabel">Konfirmasi Pesanan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Ringkasan Pesanan -->
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Total</span>
+                                <span class="fw-bold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
+                            </div>
+                            <small class="text-muted">Jumlah Buku: {{ $order->details->sum('quantity') }}</small>
+
+                            <!-- Form Input -->
+                            <form action="{{ route('ortu.orders.confirm', $order->id) }}" method="POST" class="mt-3">
+                                @csrf
+                                @method('PUT')
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Orang Tua</label>
+                                    <input type="text" name="parent_name" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nomor HP Orang Tua</label>
+                                    <input type="text" name="parent_phone" class="form-control" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 mb-2">Buat Pesanan</button>
+                            </form>
+
+                            <!-- Batalkan Pesanan -->
+                            <form action="{{ route('orders.cancel', $order->id) }}" method="POST"
+                                onsubmit="return confirm('Yakin ingin membatalkan pesanan ini? Semua data akan dihapus.')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger w-100">Batalkan Pesanan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

@@ -134,8 +134,8 @@
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td>{{ $book->classroom->class_name }}</td>
-                                                <td>{{ $book->title }}</td>
+                                                <td>{{ $book->classroom->class_name ?? 'Belum ada kelas' }}</td>
+                                                b <td>{{ $book->title }}</td>
                                                 <td>Rp {{ number_format($book->price, 0, ',', '.') }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-1">
@@ -180,7 +180,7 @@
                                                                 @csrf
                                                                 @method('PUT')
 
-                                                                <div class="mb-3">
+                                                                {{-- <div class="mb-3">
                                                                     <label for="classRoom_id" class="form-label">Class
                                                                         Name</label>
                                                                     <select class="form-select" id="classRoom_id"
@@ -194,7 +194,24 @@
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
+                                                                </div> --}}
+
+                                                                <div class="mb-3">
+                                                                    <label for="classroom_id" class="form-label">Class
+                                                                        Name</label>
+                                                                    <select class="form-select" id="classroom_id"
+                                                                        name="classroom_id" required>
+                                                                        <option value="">-- Select Class Name --
+                                                                        </option>
+                                                                        @foreach ($classrooms as $class)
+                                                                            <option value="{{ $class->id }}"
+                                                                                {{ old('classroom_id', $book->classroom_id) == $class->id ? 'selected' : '' }}>
+                                                                                {{ $class->class_name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
+
 
 
                                                                 <div class="mb-3">

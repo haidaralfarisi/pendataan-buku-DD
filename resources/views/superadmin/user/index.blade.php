@@ -249,12 +249,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">NISN</label>
-                            <input type="number" name="nisn" class="form-control" placeholder="nisn" required>
+                            <input type="number" name="nisn" class="form-control" placeholder="Nisn" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Class Room</label>
-                            <select name="classroom_code" class="form-select" required>
+                            <select name="classroom_id" class="form-select" required>
                                 <option value="" disabled selected>-- Select Class Room --</option>
                                 @foreach ($classrooms as $classroom)
                                     <option value="{{ $classroom->id }}">

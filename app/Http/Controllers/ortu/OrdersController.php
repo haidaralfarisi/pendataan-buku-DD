@@ -111,4 +111,33 @@ class OrdersController extends Controller
 
         return redirect()->route('ortu.books.index')->with('success', 'Pesanan berhasil dibatalkan.');
     }
+
+    public function confirm(Request $request, $id)
+    {
+        $request->validate([
+            'parent_name'  => 'required|string|max:255',
+            'parent_phone' => 'required|string|max:20',
+        ]);
+
+        $order = Orders::findOrFail($id);
+
+        // Update data orang tua + status default
+        $order->parent_name  = $request->parent_name;
+        $order->parent_phone = $request->parent_phone;
+        $order->status       = 'pending'; // default setelah checkout
+        $order->save();
+
+        return redirect()->route('ortu.orders.history')
+            ->with('success', 'Pesanan berhasil dibuat dan menunggu konfirmasi Admin.');
+    }
+
+    public function history()
+    {
+        $orders = Orders::where('user_id', Auth::id())
+            ->with('details.book')
+            ->latest()
+            ->get();
+
+        return view('ortu.orders.history', compact('orders'));
+    }
 }

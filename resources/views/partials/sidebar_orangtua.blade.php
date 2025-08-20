@@ -38,6 +38,15 @@
                 </a>
             </li>
 
+             <li class="nav-item mb-2">
+                <a href="{{ route('ortu.orders.history') }}"
+                    class="nav-link d-flex align-items-center gap-2
+               {{ request()->routeIs('ortu.orders.history') ? 'active' : 'text-dark' }}">
+                    <img src="{{ asset('assets/icons/history.png') }}" alt="Dashboard Icon" width="22" height="22">
+                    <span>History</span>
+                </a>
+            </li>
+
             {{-- <li class="nav-item mb-2">
                 <a href="{{ route('superadmin.yearBooks.index') }}"
                     class="nav-link d-flex align-items-center gap-2

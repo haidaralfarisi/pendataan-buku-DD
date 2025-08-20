@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->integer('price');
-            $table->integer('classRoom_id');
-            $table->string('image');
+            $table->integer('classroom_id');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->Integer('user_id'); //relasi ke users
             $table->integer('total_books');
             $table->integer('total_price');
+            $table->string('parent_name')->nullable();
+            $table->string('parent_phone')->nullable();
             $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->timestamps();
         });

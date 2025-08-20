@@ -13,8 +13,8 @@ class Books extends Model
         'id',
     ];
 
-    public function classRoom()
+    public function classroom()
     {
-        return $this->belongsTo(Classroom::class, 'classRoom_id');
+        return $this->belongsTo(Classroom::class, 'classroom_id');
     }
 }

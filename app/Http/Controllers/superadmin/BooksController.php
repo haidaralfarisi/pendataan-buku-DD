@@ -24,7 +24,7 @@ class BooksController extends Controller
         $request->validate([
             'title'        => 'required|string|max:255',
             'price'        => 'required|string', // tetap string karena kita akan format
-            'classRoom_id' => 'required|exists:classrooms,id',
+            'classroom_id' => 'required|exists:classrooms,id',
             'image'        => 'nullable|image|mimes:jpg,jpeg,png|max:2048' // validasi gambar
         ]);
 
@@ -46,7 +46,7 @@ class BooksController extends Controller
         Books::create([
             'title'        => $request->title,
             'price'        => $price,
-            'classRoom_id' => $request->classRoom_id,
+            'classroom_id' => $request->classroom_id,
             'image'        => $imagePath,
 
         ]);
@@ -59,7 +59,7 @@ class BooksController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'price' => 'required|string',
-            'classRoom_id' => 'required|exists:classrooms,id',
+            'classroom_id' => 'required|exists:classrooms,id',
             'image'        => 'nullable|image|mimes:jpg,jpeg,png|max:2048' // validasi gambar
 
         ]);
@@ -85,7 +85,7 @@ class BooksController extends Controller
         $books->update([
             'title' => $request->title,
             'price' => $price,
-            'classRoom_id' => $request->classRoom_id,
+            'classroom_id' => $request->classroom_id,
             'image'        => $imagePath
         ]);
 
