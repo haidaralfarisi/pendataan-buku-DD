@@ -1,4 +1,4 @@
-<header class="navbar sticky-top p-3 border-bottom">
+<header class="navbar sticky-top p-3 border-bottom bg-white">
     <div class="container-fluid d-flex justify-content-between align-items-center">
 
         <!-- Tombol Sidebar untuk Mobile -->

@@ -134,8 +134,7 @@
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td>{{ $book->classroom->class_name ?? 'Belum ada kelas' }}</td>
-                                                b <td>{{ $book->title }}</td>
+                                                <td>{{ $book->classroom->class_name ?? 'Belum ada kelas' }}</td><td>{{ $book->title }}</td>
                                                 <td>Rp {{ number_format($book->price, 0, ',', '.') }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-1">
@@ -287,7 +286,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Class ID</label>
-                            <select name="classRoom_id" class="form-select" required>
+                            <select name="classroom_id" class="form-select" required>
                                 <option value="">-- Pilih Class --</option>
                                 @foreach ($classrooms as $class)
                                     <option value="{{ $class->id }}">{{ $class->class_name }}</option>

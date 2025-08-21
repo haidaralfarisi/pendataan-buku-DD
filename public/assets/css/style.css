@@ -6,6 +6,7 @@
 body {
     background-color: #f7f7f7;
     overflow: hidden;
+    overflow-y: auto; /* biarkan scroll vertikal normal */
 }
 
 .nav-item {
@@ -91,6 +92,3 @@ body {
 .nav-link.active i {
     color: #000000 !important;
 }
-
-
-
